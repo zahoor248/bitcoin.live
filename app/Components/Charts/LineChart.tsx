@@ -25,8 +25,8 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 export function Chart() {
-  const [liveData, setLiveData] = useState([]);
-  const [chartData, setChartData] = useState([]);
+  const [liveData, setLiveData] = useState<any>([]);
+  const [chartData, setChartData] = useState<any>([]);
   const { sendJsonMessage, lastMessage, readyState } = useWebSocket(
     "wss://wspap.okx.com:8443/ws/v5/public",
     {
@@ -55,7 +55,7 @@ export function Chart() {
       setLiveData(data);
       const newPrice = data && data?.data && data?.data[0]?.last;
       if (newPrice) {
-        setChartData((prevData) => {
+        setChartData((prevData: any) => {
           const newData = {
             time: new Date().toLocaleTimeString(),
             Price: parseFloat(newPrice),
